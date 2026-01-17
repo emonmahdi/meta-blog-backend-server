@@ -1,11 +1,16 @@
+import { Outlet } from "react-router";
 import "./App.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
-      <h2 className="bg-purple-300 text-2xl p-4 text-secondary">
-        Meta Blog app
-      </h2>
+      <Navbar />
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
+      <Footer />
     </>
   );
 }
