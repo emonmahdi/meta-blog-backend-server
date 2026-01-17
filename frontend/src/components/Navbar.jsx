@@ -1,7 +1,87 @@
-import React from "react";
+import { NavLink } from "react-router";
+import Search from "./Search";
+import { useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = () => {
-  return <div>Navbar</div>;
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+
+  return (
+    <div className="bg-white shadow-md">
+      {/* desktop menu and icon */}
+      <div className="container max-w-7xl mx-auto px-3 py-4 flex justify-between items-center gap-4">
+        {/* logo */}
+        <div>
+          <a href="#">
+            <img src="/logo.png" alt="logo" />
+          </a>
+        </div>
+        {/* Menu Items */}
+        <ul className="md:flex hidden space-x-8 text-gray-700 font-medium">
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "hover:text-secondary"
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/blogs"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "hover:text-secondary"
+              }
+            >
+              Blogs
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "hover:text-secondary"
+              }
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "text-primary" : "hover:text-secondary"
+              }
+            >
+              Contact
+            </NavLink>
+          </li>
+        </ul>
+        {/* search icon */}
+        <div className="md:flex hidden items-center space-x-4">
+          <Search />
+          <div
+            className={`w-14 h-8 flex items-center bg-[#E8E8EA] rounded-full p-1 cursor-pointer transition-colors duration-300 ${isDarkMode ? "justify-end" : "justify-start"}`}
+          >
+            <button
+              onClick={toggleDarkMode}
+              className="w-6 h-6 rounded-full shadow-md flex justify-center items-center transition-transform duration-300 cursor-pointer"
+            >
+              {isDarkMode ? (
+                <FaMoon className="text-gray-500" />
+              ) : (
+                <FaSun className="text-yellow-500" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* mobile menu */}
+    </div>
+  );
 };
 
 export default Navbar;
