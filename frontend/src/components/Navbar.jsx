@@ -2,8 +2,15 @@ import { NavLink } from "react-router";
 import Search from "./Search";
 import { useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import { HiMiniBars3BottomRight } from "react-icons/hi2";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenuOpen = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
@@ -78,8 +85,62 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+        {/* Menu bars  */}
+        <div className="md:hidden block">
+          <button onClick={toggleMenuOpen}>
+            {isMenuOpen ? <IoClose /> : <HiMiniBars3BottomRight />}
+          </button>
+        </div>
       </div>
       {/* mobile menu */}
+      <div>
+        {isMenuOpen && (
+          <div className="md:hidden bg-white shadow-md">
+            <ul className="flex flex-col items-center space-y-4 py-4 text-gray-700">
+              <li onClick={toggleMenuOpen}>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "text-primary" : "hover:text-secondary"
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li onClick={toggleMenuOpen}>
+                <NavLink
+                  to="/blogs"
+                  className={({ isActive }) =>
+                    isActive ? "text-primary" : "hover:text-secondary"
+                  }
+                >
+                  Blogs
+                </NavLink>
+              </li>
+              <li onClick={toggleMenuOpen}>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive ? "text-primary" : "hover:text-secondary"
+                  }
+                >
+                  About
+                </NavLink>
+              </li>
+              <li onClick={toggleMenuOpen}>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? "text-primary" : "hover:text-secondary"
+                  }
+                >
+                  Contact
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
