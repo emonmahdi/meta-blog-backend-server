@@ -98,5 +98,32 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+// Update API
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not Updated!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Blog Updated Successfully",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "Something Error! Blog Not Updated",
+      error: err.message,
+    });
+  }
+});
 
 module.exports = router;
