@@ -18,10 +18,20 @@ const Banner = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">Add Blog</Link>
+            <Link
+              to="/"
+              className="bg-secondary/10 hover:text-secondary hover:underline underline-offset-4 rounded-full py-1 px-2.5"
+            >
+              Add Blog
+            </Link>
           </li>
           <li>
-            <Link to="/">Manage Blog Blog</Link>
+            <Link
+              to="/"
+              className="bg-secondary/10 hover:text-secondary hover:underline underline-offset-4 rounded-full py-1 px-2.5"
+            >
+              Manage Blog Blog
+            </Link>
           </li>
         </ul>
       </div>
