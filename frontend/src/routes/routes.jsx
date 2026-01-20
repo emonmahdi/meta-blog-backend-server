@@ -5,6 +5,9 @@ import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
 import About from "../pages/About/About";
 import AddBlog from "../pages/Blog/AddBlog/AddBlog";
+import ManageBlogs from "../pages/Blog/ManageBlog/ManageBlogs";
+import UpdateBlog from "../pages/Blog/ManageBlog/UpdateBlog";
+import BlogDetails from "../pages/Blog/BlogDetails";
 
 const routes = createBrowserRouter([
   {
@@ -24,8 +27,20 @@ const routes = createBrowserRouter([
         Component: Blog,
       },
       {
+        path: "/blogs/:id",
+        Component: BlogDetails,
+      },
+      {
         path: "/blog/addBlog",
         Component: AddBlog,
+      },
+      {
+        path: "/blog/manageBlog",
+        Component: ManageBlogs,
+      },
+      {
+        path: "/blog/edit/:id",
+        Component: UpdateBlog,
       },
       {
         path: "/contact",
