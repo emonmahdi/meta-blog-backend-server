@@ -10,6 +10,11 @@ async function ConnectDB() {
     await mongoose.connect(process.env.MONGO_URL);
     // console.log(process.env.MONGO_URL);
     console.log("Connection Successfully MongoDB");
+
+    // All APIs
+    app.get("/", (req, res) => {
+      res.send("Hello blog server");
+    });
   } catch (err) {
     console.log(err);
     console.log("Connection MongoDB Failed");
@@ -17,10 +22,6 @@ async function ConnectDB() {
 }
 
 ConnectDB();
-
-app.get("/", (req, res) => {
-  res.send("Hello blog server");
-});
 
 app.listen(port, () => {
   console.log(`Running server is port ${port}`);
