@@ -71,5 +71,32 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+// Delete Single Blog APIs
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Blog.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not deleted!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Blog Deleted Successfully",
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: "Something Error! Blog Not Deleted",
+      error: err.message,
+    });
+  }
+});
 
 module.exports = router;
