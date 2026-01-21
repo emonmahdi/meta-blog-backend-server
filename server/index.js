@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const port = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const blogRoutes = require("./src/routes/blog.routes");
@@ -8,6 +9,11 @@ require("dotenv").config();
 
 // middleware
 app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  }),
+);
 
 //Use Routes
 app.use("/blogs", blogRoutes);
