@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
@@ -10,6 +11,18 @@ const ManageBlogs = () => {
       .then((data) => setBlogs(data.data))
       .catch((error) => console.error("Error fetching blog data: " + error));
   }, []);
+
+  const handleDeleteBlog = async (id) => {
+    if (window.confirm("Are you sure to delete blog")) {
+      try {
+        await axios.delete(`http://localhost:5000/blogs/${id}`);
+        setBlogs(blogs.filter((blog) => blog._id !== id));
+        // alert("Blog deleted successfully");
+      } catch (err) {
+        console.log("Error deleting the blog", err);
+      }
+    }
+  };
 
   console.log(blogs);
   return (
@@ -70,7 +83,9 @@ const ManageBlogs = () => {
                       Edit
                     </Link>
                     <Link className="bg-red-500 text-white px-2 py-1 hover:bg-red-600">
-                      <button>Delete</button>
+                      <button onClick={() => handleDeleteBlog(blog._id)}>
+                        Delete
+                      </button>
                     </Link>
                   </td>
                 </tr>

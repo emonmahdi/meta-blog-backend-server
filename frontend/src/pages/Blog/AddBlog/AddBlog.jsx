@@ -38,6 +38,7 @@ const AddBlog = () => {
       console.log(response.data);
     } catch (err) {
       console.log(err);
+      console.log("Error add blog post");
     }
   };
 
