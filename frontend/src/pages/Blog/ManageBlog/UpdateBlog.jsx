@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../AddBlog/InputField";
 import TextAreaField from "../AddBlog/TextAreaField";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router";
 
 const UpdateBlog = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset, setValue } = useForm();
+
+  useEffect(() => {
+    const fetchSingleData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/blogs/${id}`);
+        console.log(response.data.data);
+        const blog = response.data.data;
+
+        setValue("title", blog.title);
+        setValue("description", blog.description);
+        setValue("authorName", blog.author.name);
+        setValue("authorImage", blog.author.image);
+        setValue("image", blog.image);
+      } catch (err) {
+        console.log("Fetching single blog data", err);
+      }
+    };
+    fetchSingleData();
+  }, [id]);
+
+  const onSubmit = async (data) => {
     const blogData = {
       title: data.title,
       description: data.description,
@@ -19,6 +39,21 @@ const UpdateBlog = () => {
         image: data.authorImage,
       },
     };
+
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/blogs/${id}`,
+        blogData
+      );
+      console.log(response);
+      if (response.data.success) {
+        alert(response.data.message); // from backend
+        reset(); // clear form
+        navigate("/"); // redirect
+      }
+    } catch (err) {
+      console.log("Update Error! something error", err);
+    }
 
     console.log(blogData);
   };

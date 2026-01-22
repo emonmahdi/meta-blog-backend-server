@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-import authorImg from "../../assets/authors/author-1.png";
-import blogImg from "../../assets/blogs/blog-1.png";
+// import authorImg from "../../assets/authors/author-1.png";
+// import blogImg from "../../assets/blogs/blog-1.png";
 import { useParams } from "react-router";
 import { useState } from "react";
 import { useEffect } from "react";
